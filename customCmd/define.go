@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	commands = []*discordgo.ApplicationCommand{
+	Commands = []*discordgo.ApplicationCommand{
 		{
 			Name:        "ping",
 			Description: "回复 Pong!",
@@ -51,6 +51,44 @@ var (
 				},
 			},
 		},
+		{
+			Name:        "roll",
+			Description: "掷一个六面骰子",
+		},
+		{
+			Name:        "avatar",
+			Description: "获取用户头像",
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionUser,
+					Name:        "user",
+					Description: "要查看头像的用户（可选，不填则显示自己的）",
+					Required:    false,
+				},
+			},
+		},
+		{
+			Name:        "random",
+			Description: "生成指定范围内的随机数",
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionInteger,
+					Name:        "min",
+					Description: "最小值",
+					Required:    true,
+				},
+				{
+					Type:        discordgo.ApplicationCommandOptionInteger,
+					Name:        "max",
+					Description: "最大值",
+					Required:    true,
+				},
+			},
+		},
+		{
+			Name:        "joke",
+			Description: "获取一个随机程序员笑话",
+		},
 	}
 
 	CommandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
@@ -58,6 +96,10 @@ var (
 		"hello":     Hello,
 		"goodbye":   Goodbye,
 		"calculate": Calculate,
+		"roll":      Roll,
+		"avatar":    Avatar,
+		"random":    Random,
+		"joke":      Joke,
 	}
 )
 
@@ -93,7 +135,7 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 		fmt.Println("register commands:")
 		// 重新注册所有命令
-		for _, v := range commands {
+		for _, v := range Commands {
 			fmt.Println(v.Name)
 			_, err := s.ApplicationCommandCreate(appID, "", v)
 			if err != nil {

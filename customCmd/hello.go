@@ -30,10 +30,17 @@ func Hello(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
 	// spew.Dump(i.Member.User.Username)
 
+	var username string
+	if i.Member != nil {
+		username = i.Member.User.Username
+	} else {
+		username = i.User.Username
+	}
+
 	s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 		Type: discordgo.InteractionResponseChannelMessageWithSource,
 		Data: &discordgo.InteractionResponseData{
-			Content: fmt.Sprintf("Hello, %s!", i.Member.User.Username),
+			Content: fmt.Sprintf("Hello, %s!", username),
 		},
 	})
 }

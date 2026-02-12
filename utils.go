@@ -20,14 +20,14 @@ func GetAllChannels(s *discordgo.Session) []*discordgo.Channel {
 		fmt.Printf("\n服务器: %s (ID: %s)\n", guild.Name, guild.ID)
 
 		// 获取服务器中的所有频道
-		channels, err := s.GuildChannels(guild.ID)
+		guildChannels, err := s.GuildChannels(guild.ID)
 		if err != nil {
 			fmt.Printf("获取频道列表失败 [%s]: %v\n", guild.Name, err)
 			continue
 		}
 
 		// 按频道类型分类显示
-		for _, channel := range channels {
+		for _, channel := range guildChannels {
 			switch channel.Type {
 			case discordgo.ChannelTypeGuildText:
 				fmt.Printf("文字频道: %s (ID: %s)\n", channel.Name, channel.ID)
