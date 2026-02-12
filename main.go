@@ -10,7 +10,6 @@ import (
 	"github.com/joho/godotenv"
 
 	"dwyo/discord-bot/customCmd"
-	"dwyo/discord-bot/schedule"
 )
 
 func main() {
@@ -66,9 +65,9 @@ func main() {
 	// }
 
 	/// 获取所有频道
-	GetAllChannels(dg)
+	// GetAllChannels(dg)
 	// 定时任务
-	schedule.TangSong(dg, os.Getenv("SPECIAL_CHANNEL_ID"))
+	// schedule.TangSong(dg, os.Getenv("SPECIAL_CHANNEL_ID"))
 
 	fmt.Println("Bot is now running. Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
