@@ -55,14 +55,14 @@ func main() {
 		return
 	}
 
-	fmt.Println("正在注册斜杠命令...")
-	for _, v := range customCmd.Commands {
-		_, err := dg.ApplicationCommandCreate(appID, "", v)
-		if err != nil {
-			fmt.Printf("注册命令 %v 时出错: %v\n", v.Name, err)
-			return
-		}
-	}
+	//fmt.Println("正在注册斜杠命令...")
+	//for _, v := range customCmd.Commands {
+	//	_, err := dg.ApplicationCommandCreate(appID, "", v)
+	//	if err != nil {
+	//		fmt.Printf("注册命令 %v 时出错: %v\n", v.Name, err)
+	//		return
+	//	}
+	//}
 
 	// 查询已注册的命令
 	fmt.Println("\n已注册的命令:")
@@ -76,7 +76,7 @@ func main() {
 	}
 
 	/// 获取所有频道
-	GetAllChannels(dg)
+	// GetAllChannels(dg)
 	// 定时任务
 	// schedule.TangSong(dg, os.Getenv("SPECIAL_CHANNEL_ID"))
 
